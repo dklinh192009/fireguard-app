@@ -1,10 +1,11 @@
-import Colors from '@/constants/Colors';
+import { useTheme } from '@/contexts/ThemeContext';
 import { IconFlame, IconHome, IconShieldCheck, IconWifi } from '@tabler/icons-react-native';
-import { StyleSheet, Text, View } from 'react-native';
+import { useRouter } from 'expo-router'; // ➕ thêm dòng này lên đầu file
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function WelcomeScreen() {
-  const theme = Colors.light; // tạm cố định sáng, làm dark mode động sau
-
+  const { theme } = useTheme();
+  const router = useRouter();
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <Text style={[styles.skip, { color: theme.textMuted }]}>Bỏ qua</Text>
@@ -37,9 +38,9 @@ export default function WelcomeScreen() {
         </View>
       </View>
 
-      <View style={[styles.button, { backgroundColor: theme.accent }]}>
+      <TouchableOpacity style={[styles.button, { backgroundColor: theme.accent }]} onPress={() => router.push('/features')}>
         <Text style={styles.buttonText}>Bắt đầu khám phá</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
